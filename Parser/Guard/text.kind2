@@ -1,0 +1,8 @@
+use Parser/Guard/new
+use Parser/skip
+use Parser/test
+
+text <A> (txt: String) (then: (Parser A)) : (Parser/Guard A) =
+  (new _
+    (skip _ (test txt))
+    then)

@@ -1,0 +1,4 @@
+zero
+: Nat
+
+~λP λsucc λzero zero

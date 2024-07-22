@@ -1,0 +1,22 @@
+/// Creates a new App instance.
+///
+/// # Type Parameters
+///
+/// * `S` - The type of the application state.
+///
+/// # Inputs
+///
+/// * `tick` - A function that updates the state on each tick.
+/// * `onkb` - A function that updates the state based on keyboard input.
+///
+/// # Output
+///
+/// A new App instance with the specified behaviors.
+
+new <S>
+- init: S
+- tick: ∀(state: S) S
+- when: ∀(key: U48) ∀(state: S) S
+: (App S)
+
+~λP λnew (new init tick when)

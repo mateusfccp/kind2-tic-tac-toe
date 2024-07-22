@@ -1,0 +1,5 @@
+succ
+- n: Nat
+: Nat
+
+~λP λsucc λzero (succ n)

@@ -1,0 +1,6 @@
+new
+- player: Player
+- cell: (Pair U48 U48)
+: Move
+
+~λP λnew (new player cell)

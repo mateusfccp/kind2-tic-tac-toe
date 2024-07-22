@@ -1,0 +1,7 @@
+use List/{cons,nil}
+
+join <T> (xs: (List (List/Chunk T))) : (List/Chunk T) =
+  match xs {
+    cons: (λnil (List/Chunk/concat _ xs.head (join _ xs.tail) nil))
+    nil: (λnil nil)
+  }

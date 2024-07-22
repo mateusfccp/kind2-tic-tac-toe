@@ -1,0 +1,5 @@
+draw
+- board: (List Move)
+: GameState
+
+~λP λinProgress λdraw λwinner (draw board)

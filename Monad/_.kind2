@@ -1,0 +1,4 @@
+data Monad <M: * -> *>
+| new
+    (bind: ∀(A: *) ∀(B: *) ∀(a: (M A)) ∀(b: A -> (M B)) (M B))
+    (pure: ∀(A: *) ∀(a: A) (M A))

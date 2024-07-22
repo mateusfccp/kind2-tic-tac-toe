@@ -1,0 +1,17 @@
+use List/{cons,nil}
+use Bool/{true,false}
+
+filter <A>
+- cond: A -> Bool
+- list: (List A)
+: (List A)
+
+match list {
+  cons:
+    let test = (cond list.head)
+    let head = match test { true: (cons _ list.head) false: λx x }: (List A) -> (List A)
+    let tail = (filter _ cond list.tail)
+    (head tail)
+  nil:
+    (nil _)
+}

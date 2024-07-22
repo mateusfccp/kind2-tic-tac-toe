@@ -1,0 +1,9 @@
+match
+- P: GameState -> *
+- inProgress: ∀(currentPlayer: Player) ∀(cursorPosition: (Pair U48 U48)) ∀(board: (List Move)) (P (GameState/inProgress currentPlayer cursorPosition board))
+- draw: ∀(board: (List Move)) (P (GameState/draw board))
+- winner: ∀(player: Player) ∀(board: (List Move)) (P (GameState/winner player board))
+- gameState: GameState
+: (P gameState)
+
+(~gameState P inProgress draw winner)

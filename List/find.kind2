@@ -1,0 +1,18 @@
+use Bool/{true,false}
+use List/{cons,nil}
+use Maybe/{some,none}
+
+find <A>
+- fn: A -> Bool
+- xs: (List A)
+: (Maybe A)
+
+match xs {
+  cons: 
+    let result = (fn xs.head)
+    match result {
+      true: (some _ xs.head)
+      false: (find _ fn xs.tail)
+    }
+  nil: (none _)
+}

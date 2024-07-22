@@ -1,0 +1,10 @@
+use Equal/refl
+
+apply <A: *> <B: *> <a: A> <b: A>
+- f: A -> B
+- e: (Equal A a b)
+: (Equal B (f a) (f b))
+
+match e {
+  refl: ~λPλe(e (f e.a))
+}: (Equal B (f e.a) (f e.b))

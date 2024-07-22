@@ -1,0 +1,5 @@
+data Direction
+| left
+| up
+| right
+| down

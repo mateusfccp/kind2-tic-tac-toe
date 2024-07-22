@@ -1,0 +1,22 @@
+/// Computes the logical AND of all boolean values in a list.
+///
+/// # Input
+///
+/// * `list` - A list of boolean values.
+///
+/// # Output
+///
+/// Returns `true` if all elements in the list are `true`, otherwise `false`.
+/// An empty list returns `true` (vacuous truth).
+
+use List/{cons,nil}
+use Bool/{true}
+
+and
+- list: (List Bool)
+: Bool
+
+fold list {
+  cons: (Bool/and list.head list.tail)
+  nil: true
+}

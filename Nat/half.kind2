@@ -1,0 +1,47 @@
+/// Computes half of a natural number, rounding down.
+///
+/// # Input
+///
+/// * `n` - The natural number to halve.
+///
+/// # Output
+///
+/// Half of `n`, rounded down to the nearest natural number.
+///
+/// # Examples
+///
+/// * `(half 0) = 0`
+/// * `(half 1) = 0`
+/// * `(half 2) = 1`
+/// * `(half 3) = 1`
+/// * `(half 4) = 2`
+
+use Nat/{succ,zero}
+
+half
+- n: Nat
+: Nat
+
+match n {
+  succ: match n.pred {
+    succ: (succ (half n.pred.pred))
+    zero: zero
+  }
+  zero: zero
+}
+
+
+//half 0 == 1 wrong
+//half 1 == 1 wrong
+//half 2 == correct
+//half 3 == correct
+//half 4 == correct
+//half 5 == correct
+
+
+
+
+
+
+
+

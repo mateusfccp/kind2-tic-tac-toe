@@ -1,0 +1,27 @@
+/// Draws a Planet as a list of shapes.
+///
+/// This function creates a list of shapes representing the planet,
+/// including its position and velocity vector.
+///
+/// # Input
+///
+/// * `planet` - The Planet to be drawn
+///
+/// # Output
+///
+/// A list of shapes representing the drawn Planet
+
+draw
+- player: Player
+: (List Shape)
+
+match player {
+  Player/X:
+    let pos = (V2/new 0.0 0.0)
+    let rad = 10.0
+    [(Shape/circle pos rad)]
+  Player/O:
+    let pos = (V2/new 0.0 0.0)
+    let rad = 10.0
+    [(Shape/circle pos rad)]
+}

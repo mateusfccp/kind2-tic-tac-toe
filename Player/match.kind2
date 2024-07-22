@@ -1,0 +1,8 @@
+match
+- P: Player -> *
+- x: (P (Player/X))
+- o: (P (Player/O))
+- p: Player
+: (P p)
+
+(~p P x o)

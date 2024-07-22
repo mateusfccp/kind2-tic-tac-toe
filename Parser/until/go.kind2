@@ -1,0 +1,18 @@
+use Parser/Result/{done,fail}
+use List/{cons,nil}
+use Bool/{true,false}
+
+go <A> (until: (Parser Bool)) (parse: (Parser A)) (terms: (List A)) : (Parser (List A)) =
+  λcode
+    match result = (until code) {
+      done:
+        match result.value {
+          true: (done _ result.code terms)
+          false:
+            match parse_result = (parse result.code) {
+              done: (go _ until parse (cons _ parse_result.value terms) parse_result.code)
+              fail: (fail _ parse_result.error)
+            }
+        }
+      fail: (fail _ result.error)
+    }

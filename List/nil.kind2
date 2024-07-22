@@ -1,0 +1,4 @@
+nil <T>
+: (List T)
+
+~λP λcons λnil nil

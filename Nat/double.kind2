@@ -1,0 +1,20 @@
+/// Doubles a natural number.
+///
+/// # Input
+///
+/// * `n` - The natural number to be doubled.
+///
+/// # Output
+///
+/// The result of doubling `n`.
+
+use Nat/{succ,zero}
+
+double
+- n: Nat
+: Nat
+
+match n {
+  zero: zero
+  succ: (succ (succ (double n.pred)))
+}

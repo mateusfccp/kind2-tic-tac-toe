@@ -1,0 +1,4 @@
+up
+: Direction
+
+~λP λleft λup λright λdown up

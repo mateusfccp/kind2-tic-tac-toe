@@ -1,0 +1,9 @@
+join
+- sep: String
+- strs: (List String)
+: String
+
+match strs {
+  List/cons: (String/concat strs.head (String/join/go sep strs.tail))
+  List/nil: String/nil
+}

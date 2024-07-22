@@ -1,0 +1,18 @@
+use List/{cons,nil}
+use Bool/{true,false}
+use Parser/Result/{done,fail}
+
+go (cond: Char -> Bool) : (Parser String) =
+  λcode
+    match code {
+      cons:
+        match x = (cond code.head) {
+          true:
+            match result = (go cond code.tail) {
+              done: (done _ result.code (String/cons code.head result.value))
+              fail: (fail _ result.error)
+            }
+          false: (done _ code String/nil)
+        }
+      nil: (done _ String/nil String/nil)
+    }

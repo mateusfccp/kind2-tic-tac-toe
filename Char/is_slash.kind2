@@ -1,0 +1,5 @@
+is_slash
+- a: Char
+: Bool
+
+(Char/equal a 47)

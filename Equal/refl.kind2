@@ -1,0 +1,5 @@
+refl <A>
+- x: A
+: (Equal A x x)
+
+~ λP λrefl (refl x)

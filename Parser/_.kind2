@@ -1,0 +1,2 @@
+Parser <A: *> : * =
+  String -> (Parser/Result A)

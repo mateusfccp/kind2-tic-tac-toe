@@ -1,0 +1,28 @@
+/// Conditional expression for Bool values.
+///
+/// # Parameters
+///
+/// * `P` - The type of the result.
+///
+/// # Inputs
+///
+/// * `b` - The boolean condition.
+/// * `t` - The value to return if the condition is true.
+/// * `f` - The value to return if the condition is false.
+///
+/// # Output
+///
+/// Returns `t` if `b` is true, otherwise returns `f`.
+
+use Bool/{true,false}
+
+if <P: *>
+- b: Bool
+- t: P
+- f: P
+: P
+
+match b {
+  true: t
+  false: f
+}

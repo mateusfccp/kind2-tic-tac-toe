@@ -1,0 +1,10 @@
+use Pair/{new}
+
+mapSnd <A> <B> <T>
+- p: (Pair A B)
+- f: B -> T
+: (Pair A T)
+
+match p {
+  new: (new A T p.fst (f p.snd))
+}

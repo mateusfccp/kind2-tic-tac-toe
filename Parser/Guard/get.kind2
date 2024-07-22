@@ -1,0 +1,4 @@
+get <A> (p: (Parser/Guard A)) <P> (f: (Parser Bool) -> (Parser A) -> P) : P =
+  match p {
+    Pair/new: (f p.fst p.snd)
+  }

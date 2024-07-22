@@ -1,0 +1,4 @@
+data Cmp
+| ltn
+| eql
+| gtn

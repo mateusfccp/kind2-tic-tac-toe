@@ -1,0 +1,3 @@
+data Maybe <T: *>
+| some (value: T)
+| none
