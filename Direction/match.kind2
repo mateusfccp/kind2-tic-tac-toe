@@ -1,9 +1,11 @@
+use Direction/{left, up, right, down}
+
 match
 - P: Direction -> *
-- left: (P Direction/left)
-- up: (P Direction/up)
-- right: (P Direction/right)
-- down: (P Direction/down)
+- left: (P left)
+- up: (P up)
+- right: (P right)
+- down: (P down)
 - direction: Direction
 : (P direction)
 

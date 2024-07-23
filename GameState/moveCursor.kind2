@@ -1,34 +1,26 @@
+use Direction/{left, up, right, down}
 use GameState/{inProgress, draw, winner}
-
-forward (n: U48) : U48 = (+ 1 n)
-backward (n: U48) : U48 = (- 1 n)
 
 moveCursor
 - state: GameState
 - direction: Direction
 : GameState
 
-let a = λd match d {
-  Direction/left:
-    (Pair/mapFst _ _ _)
-  Direction/up:
-    (Pair/mapSnd _ _ _)
-  Direction/right:
-    (Pair/mapFst _ _ _)
-  Direction/down:
-    (Pair/mapSnd _ _ _)  
-}
-
-let b = λd match d {
-  Direction/left: backward
-  Direction/up: backward
-  Direction/right: forward
-  Direction/down: forward
-}
+use forward = λn (% (+ n 1) 3)
+use backward = λn
+  let neg1 = (- 0 1)
+  let n = (- n 1)
+  (U48/if _ (== n neg1) 2 n)
 
 match state {
   inProgress:
-    let position = (a direction state.cursorPosition b)
+    use position = match direction {
+      left:  (Pair/mapFst _ _ _ state.cursorPosition backward)
+      up:    (Pair/mapSnd _ _ _ state.cursorPosition backward)
+      right: (Pair/mapFst _ _ _ state.cursorPosition forward)
+      down:  (Pair/mapSnd _ _ _ state.cursorPosition forward)
+    }
+
     (inProgress state.currentPlayer position state.board)
   draw: state
   winner: state

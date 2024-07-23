@@ -179,7 +179,8 @@ if (typeof window !== 'undefined') {
 	    kGameState = new KGameState(state);
 
 	    if (R.not(R.equals(lastState, state))) {
-		console.log('State: ', kGameState);
+		// console.log('State: ', kGameState);
+		console.log('Cursor position: ', kGameState.cursorPosition)
 		draw(canvas, kGameState);
 		lastState = state;
 	    }
