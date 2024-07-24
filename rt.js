@@ -63,7 +63,7 @@ class KPlayer {
 	case 'O':
 	    return '⭕️';
 	default:
-	    throw new Error(`Player type should be either 'X' or 'O'. Got ${this.player.type}`);
+	    throw new Error(`Player type should be either 'X' or 'O'. Got ${this.type}`);
 	}
     }
 }
@@ -280,7 +280,10 @@ if (typeof window !== 'undefined') {
 	    kState = new KGameState(state);
 
 	    if (R.not(R.equals(lastState, kState))) {
-		console.log('State: ', kState);
+		if (kState.debugMode) {
+		    console.log('State: ', kState);
+		}
+
 		draw(canvas, kState);
 		lastState = kState;
 	    }
