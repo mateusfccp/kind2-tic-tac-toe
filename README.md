@@ -1,12 +1,8 @@
 # Tic-tac-toe
 
-A simple, two-player[^1], tic-tac-toe implementation in Kind2.
+A simple, two-player local[^1], tic-tac-toe implementation in Kind2.
 
-<img width="250" alt="Screenshot 2024-07-24 at 3 28 11 PM" src="https://github.com/user-attachments/assets/25367941-d7f5-4e9e-be95-706a3843d36f">
-<img width="250" alt="Screenshot 2024-07-24 at 3 28 06 PM" src="https://github.com/user-attachments/assets/d080016c-137f-4fcf-8bd9-5b692ec00bed">
-
-![output](https://github.com/user-attachments/assets/30fd32ea-e8af-43db-8c1a-b4a500333226)
-
+<img width="400" alt="Tic-tac-toe demonstration" src="https://github.com/user-attachments/assets/30fd32ea-e8af-43db-8c1a-b4a500333226">
 
 ## Installing
 
