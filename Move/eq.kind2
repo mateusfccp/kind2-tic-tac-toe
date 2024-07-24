@@ -1,0 +1,13 @@
+eq
+- a: Move
+- b: Move
+: Bool
+
+match a {
+  Move/new: match b {
+    Move/new:
+      (Bool/and
+        (Player/eq a.player b.player)
+	(Cell/eq a.cell b.cell))
+  }
+}

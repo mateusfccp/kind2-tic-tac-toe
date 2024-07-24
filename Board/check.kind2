@@ -1,0 +1,31 @@
+right:       _ = (Pair/new _ _ 1 0)
+down:        _ = (Pair/new _ _ 0 1)
+bottomRight: _ = (Pair/new _ _ 1 1)
+bottomLeft:  _ = (Pair/new _ _ (U48/neg 1) 1)
+
+check
+- move: Move
+- count: U48
+- board: (Board _)
+- direction: (Cell _)
+: Bool
+
+match move {
+  Move/new:
+    match move.cell {
+      Pair/new:
+        let targetCell = (Cell/add move.cell direction)
+        let target = (Move/new move.player targetCell)
+        let next = (List/find _ (Move/eq target) board)
+
+        match next {
+          Maybe/some:
+	    let nextCount = (- count 1)
+	    switch nextCount {
+              0: Bool/true
+              _: (check next.value nextCount board direction)
+            }
+          Maybe/none: Bool/false
+        }
+  }
+}

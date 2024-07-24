@@ -15,7 +15,12 @@ match state {
         let move = (Move/new state.currentPlayer state.cursorPosition)
 	let board = (List/concat _ state.board [move])
 	let board = (Board/sort board)
-        (inProgress player state.cursorPosition board)
+	let w = (Board/winner board)
+
+	match w {
+	  Maybe/none: (inProgress player state.cursorPosition board)
+	  Maybe/some: (winner w.value board)
+	}
     }
   draw: state
   winner: state

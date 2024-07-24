@@ -1,0 +1,10 @@
+use Bool/{and, or}
+use Player/{is_x, is_o}
+
+eq
+- a: Player
+- b: Player
+: Bool
+
+(or (and (is_x a) (is_x b))
+    (and (is_o a) (is_o b)))

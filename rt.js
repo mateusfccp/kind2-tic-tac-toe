@@ -1,3 +1,5 @@
+'use strict';
+
 class KApp {
     constructor(app) {
 	return app
@@ -51,6 +53,17 @@ class KPlayer {
 
 	this.type = type;
     }
+
+    get emoji() {
+	switch (this.type) {
+	case 'X':
+	    return '❌';
+	case 'O':
+	    return '⭕️';
+	default:
+	    throw new Error(`Player type should be either 'X' or 'O'. Got ${this.player.type}`);
+	}
+    }
 }
 
 class KPair {
@@ -93,16 +106,7 @@ class KMove {
 	const fontSize = width / 4.0;
 	context.font = `normal ${fontSize}px sans`;
 
-	let text;
-	
-	if (this.player.type == 'X') {
-	    text = '❌';
-	} else if (this.player.type = 'O') {
-	    text = '⭕️';
-	} else {
-	    throw new Error(`Player type should be either 'X' or 'O'. Got ${this.player.type}`);
-	}
-
+	const text = this.player.emoji;
 	const cellWidth = width / 3.0;
 	const cellHeight = height / 3.0;
 	const x = this.cell.fst * cellWidth + (cellWidth - fontSize) / 2.0;
@@ -191,6 +195,21 @@ function drawCursor(state) {
     context.fillStyle = "#000000";
 }
 
+function drawWinnerMessage(player) {
+    const context = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio;
+    const width = canvas.width / dpr;
+    const height = canvas.height / dpr;
+
+    context.fillStyle = '#FFFFFFBB';
+    context.fillRect(0, 0, width, height);
+
+    context.textAlign = 'center';
+    context.font = `normal ${24 * dpr}px sans-serif`;
+    context.fillStyle = 'black';
+    context.fillText(`Winner: ${player.emoji}`, width / 2.0, height / 2.0);
+}
+
 function draw(canvas, state) {
     const context = canvas.getContext('2d');
 
@@ -202,8 +221,17 @@ function draw(canvas, state) {
 
     drawBoard();
 
-    for (move of state.board) {
+    for (const move of state.board) {
 	move.draw();
+    }
+
+    switch (state.kind) {
+    case 'winner':
+	drawWinnerMessage(state.player);
+	break;
+    case 'draw':
+	drawDrawMessage();
+	break;
     }
 };
 

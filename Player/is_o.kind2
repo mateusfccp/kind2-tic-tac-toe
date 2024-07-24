@@ -1,0 +1,11 @@
+use Bool/{true, false}
+use Player/{x, o}
+
+is_o
+- player: Player
+: Bool
+
+match player {
+  x: false
+  o: true
+}

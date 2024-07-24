@@ -1,0 +1,14 @@
+add
+- a : (Cell _)
+- b : (Cell _)
+: (Cell _)
+
+match a {
+  Pair/new:
+    match b {
+      Pair/new:
+        (Pair/new _ _
+          (+ a.fst b.fst)
+          (+ a.snd b.snd))
+  }
+}
