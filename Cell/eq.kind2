@@ -1,0 +1,18 @@
+use Bool/{and, false, true}
+use Pair/new
+use U48/to_bool
+
+eq
+- a: (Cell _)
+- b: (Cell _)
+: Bool
+
+match a {
+  new:
+    match b {
+       new:
+        let fstEq = (to_bool (== a.fst b.fst))
+     	let sndEq = (to_bool (== a.snd b.snd))
+     	(and fstEq sndEq)
+     }
+}

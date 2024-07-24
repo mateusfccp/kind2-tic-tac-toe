@@ -1,0 +1,9 @@
+use Bool/{not}
+use Cell/lt
+
+gte
+- a: (Cell _)
+- b: (Cell _)
+: Bool
+
+(not (lt a b))

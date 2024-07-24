@@ -1,0 +1,7 @@
+match
+- P: Move -> *
+- new: ∀(player: Player) ∀(cell: (Cell _)) (P (Move/new player cell))
+- move: Move
+: (P move)
+
+(~move P new)

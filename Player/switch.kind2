@@ -1,0 +1,10 @@
+use Player/{x, o}
+
+switch
+- player: Player
+: Player
+
+match player {
+  x: o
+  o: x
+}

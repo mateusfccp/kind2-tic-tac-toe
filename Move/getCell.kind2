@@ -1,0 +1,10 @@
+use Move/new
+
+getCell
+- move: Move
+: (Cell _)
+
+match move {
+  new:
+    move.cell
+}

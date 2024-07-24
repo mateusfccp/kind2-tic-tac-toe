@@ -1,0 +1,17 @@
+use List/{cons, filter, nil}
+
+qsort <A>
+- list: (List A)
+- lt: A -> A -> Bool
+- gte: A -> A -> Bool
+: (List A)
+
+match list {
+  nil: (nil _)
+  cons:
+    let lesser  = (filter _ (gte list.head) list.tail)
+    let greater = (filter _ (lt  list.head) list.tail)
+    (List/concat _
+      (qsort _ lesser lt gte)
+      list.head ++ (qsort _ greater lt gte))
+}

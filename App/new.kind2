@@ -13,10 +13,10 @@
 ///
 /// A new App instance with the specified behaviors.
 
-new <S>
+new <S> <D>
 - init: S
-- tick: ∀(state: S) S
 - when: ∀(key: U48) ∀(state: S) S
-: (App S)
+- debug: D
+: (App S D)
 
-~λP λnew (new init tick when)
+~λP λnew (new init when debug)

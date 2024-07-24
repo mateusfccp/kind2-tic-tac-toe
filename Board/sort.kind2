@@ -1,0 +1,10 @@
+use List/qsort
+
+sort
+- board: (Board _)
+: (Board _)
+
+(qsort _
+  board
+  λa λb (Cell/lt (Move/getCell a) (Move/getCell b))
+  λa λb (Cell/gte (Move/getCell a) (Move/getCell b)))

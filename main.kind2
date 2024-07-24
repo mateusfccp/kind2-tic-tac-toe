@@ -1,28 +1,30 @@
 main: _
 
-use init =
-  (GameState/inProgress
-	Player/x
-	(Pair/new _ _ 0 0)
-	[(Move/new Player/x (Pair/new _ _ 0 0)),
-         (Move/new Player/x (Pair/new _ _ 1 1)),
-         (Move/new Player/x (Pair/new _ _ 2 2)),
-         (Move/new Player/o (Pair/new _ _ 0 1)),
-         (Move/new Player/o (Pair/new _ _ 2 0))])
-
-use tick = λstate
-  state
+use init = (GameState/new _)
 
 use when = λkey λstate
   match state {
     GameState/inProgress:
-      let direction = (Direction/fromKeycode key)
-      match direction {
-        Maybe/some: (GameState/moveCursor state direction.value)
-	Maybe/none: state
-      }
+      // Keycode 13 = Enter
+      (U48/if _ (== key 13)
+        (GameState/putMove state)
+
+      // Keycode 88 = X
+      (U48/if _ (== key 88)
+        (GameState/inProgress Player/x state.cursorPosition state.board)
+
+      // Keycode 79 = O
+      (U48/if _ (== key 79)
+        (GameState/inProgress Player/o state.cursorPosition state.board)
+
+      // Else
+        let direction = (Direction/fromKeycode key)
+        match direction {
+          Maybe/some: (GameState/moveCursor state direction.value)
+	  Maybe/none: state
+        })))
     GameState/draw: state
     GameState/winner: state
   }
 
-(App/new _ init tick when)
+(App/new _ _ init when [])

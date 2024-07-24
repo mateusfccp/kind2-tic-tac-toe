@@ -1,2 +1,2 @@
 data Move
-| new (player: Player) (cell: (Pair U48 U48)) : Move
+| new (player: Player) (cell: (Cell _)) : Move

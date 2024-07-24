@@ -1,0 +1,8 @@
+// The type parameter is a workaround. The JS compiler (correctly) assumed that
+// this could be eagerly inlined. The problem is that this definition appears
+// before the Pair/new in the compiled JS. This results in a runtime error in
+// that this object tries to access an undefined symbol (Pair/new). By adding
+// a parameter, the compiler is forced to make this a proper function, which
+// is lazy, and then, when called, the symbol is already defined.
+// See: https://github.com/HigherOrderCO/kind/issues/20
+Cell <A> : * = (Pair U48 U48)

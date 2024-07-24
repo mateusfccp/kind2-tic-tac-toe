@@ -1,0 +1,22 @@
+use Bool/{and, false, if, true}
+use Pair/new
+use U48/to_bool
+
+lt
+- a: (Cell _)
+- b: (Cell _)
+: Bool
+
+match a {
+  new:
+    match b {
+       new:
+     	let sndLt = (to_bool (< a.snd b.snd))
+	(if _ sndLt true
+
+	let fstLt = (to_bool (< b.snd a.snd))
+	(if _ fstLt false
+
+        (to_bool (< a.fst b.fst))))
+     }
+}

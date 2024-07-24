@@ -1,4 +1,4 @@
 data GameState
-| inProgress (currentPlayer: Player) (cursorPosition: (Pair U48 U48)) (board: (List Move))
-| draw (board: (List Move))
-| winner (player: Player) (board: (List Move))
+| inProgress (currentPlayer: Player) (cursorPosition: (Cell _)) (board: (Board _))
+| draw (board: (Board _))
+| winner (player: Player) (board: (Board _))
