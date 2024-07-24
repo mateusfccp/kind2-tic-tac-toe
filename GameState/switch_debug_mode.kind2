@@ -1,0 +1,18 @@
+use Bool/not
+use GameState/{in_progress, draw, winner, get_debug_mode}
+
+switch_debug_mode
+- state: GameState
+: GameState
+
+let current_debug_mode = (GameState/get_debug_mode state)
+let debug_mode = (not current_debug_mode)
+
+match state {
+  in_progress:
+    (in_progress state.current_player state.cursor_position state.board debug_mode)
+  draw:
+    (draw state.board debug_mode)
+  winner:
+    (winner state.player state.board debug_mode)
+}

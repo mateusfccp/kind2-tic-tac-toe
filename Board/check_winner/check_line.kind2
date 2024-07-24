@@ -1,0 +1,30 @@
+use Bool/{true, false}
+use List/find
+use Maybe/{some, none}
+
+check_line
+- move: Move
+- count: U48
+- board: (Board _)
+- direction: (Cell _)
+: Bool
+
+match move {
+  Move/new:
+    match move.cell {
+      Pair/new:
+        let target_cell = (Cell/add move.cell direction)
+        let target = (Move/new move.player target_cell)
+        let next = (find _ (Move/eq target) board)
+
+        match next {
+          some:
+	    let next_count = (- count 1)
+	    switch next_count {
+              0: true
+              _: (check_line next.value next_count board direction)
+            }
+          none: false
+        }
+  }
+}

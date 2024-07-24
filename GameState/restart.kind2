@@ -1,0 +1,8 @@
+use GameState/get_debug_mode
+
+restart
+- state: GameState
+: GameState
+
+let initial_cell = (Pair/new _ _ 0 0)
+(GameState/in_progress Player/x initial_cell [] (get_debug_mode state))

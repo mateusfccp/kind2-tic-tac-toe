@@ -1,13 +1,12 @@
 'use strict';
 
-class KApp {
-    constructor(app) {
-	return app
+class KGame {
+    constructor(game) {
+	return game
 	(null)
-	(init => when => debug => {
+	(init => when => {
 	    this.init = init;
 	    this.when = when;
-	    this.debug = listFromKind2((p) => p, debug);
 	});
     }
 }
@@ -17,26 +16,29 @@ class KGameState {
 	return gameState
 	(null)
 	
-	// inProgress
-	(currentPlayer => cursorPosition => board => {
-	    this.kind = 'inProgress';
+	// in_progress
+	(currentPlayer => cursorPosition => board => debugMode => {
+	    this.kind = 'in_progress';
 	    this.currentPlayer = new KPlayer(currentPlayer);
 	    this.cursorPosition = new KPair(cursorPosition);
 	    this.board = listFromKind2((move) => KMove.fromKind2(move), board);
+	    this.debugMode = boolFromKind2(debugMode);
 	})
 
 	// draw
-	(board => {
+	(board => debugMode => {
 	    this.kind = 'draw';
 	    this.board = listFromKind2((move) => KMove.fromKind2(move), board);
+	    this.debugMode = boolFromKind2(debugMode);
 	})
 
 	// winner
-	(player => board => {
+	(player => board => debugMode => {
 	    this.kind = 'winner';
 	    this.player = new KPlayer(player);
 	    this.board = listFromKind2((move) => KMove.fromKind2(move), board);
-	})
+	    this.debugMode = boolFromKind2(debugMode);
+	});
     }
 
     get cursorCellAvailable() {
@@ -104,12 +106,13 @@ class KMove {
 	const height = canvas.height / dpr;
 	
 	const fontSize = width / 4.0;
+	context.textAlign = 'center';
 	context.font = `normal ${fontSize}px sans`;
 
 	const text = this.player.emoji;
 	const cellWidth = width / 3.0;
 	const cellHeight = height / 3.0;
-	const x = this.cell.fst * cellWidth + (cellWidth - fontSize) / 2.0;
+	const x = this.cell.fst * cellWidth + cellWidth / 2.0;
 	const y = this.cell.snd * cellHeight + fontSize;
 	context.fillText(text, x, y);
     }
@@ -210,12 +213,27 @@ function drawWinnerMessage(player) {
     context.fillText(`Winner: ${player.emoji}`, width / 2.0, height / 2.0);
 }
 
+function drawDrawMessage() {
+    const context = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio;
+    const width = canvas.width / dpr;
+    const height = canvas.height / dpr;
+
+    context.fillStyle = '#FFFFFFBB';
+    context.fillRect(0, 0, width, height);
+
+    context.textAlign = 'center';
+    context.font = `normal ${24 * dpr}px sans-serif`;
+    context.fillStyle = 'black';
+    context.fillText('Draw', width / 2.0, height / 2.0);
+}
+
 function draw(canvas, state) {
     const context = canvas.getContext('2d');
 
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    if (state.kind === 'inProgress') {
+    if (state.kind === 'in_progress') {
 	drawCursor(state);
     }
 
@@ -253,9 +271,8 @@ if (typeof window !== 'undefined') {
 	canvas.style.width = `${rect.width}px`;
 	canvas.style.height = `${rect.height}px`;
 	
-	let app       = new KApp(main);
-	console.log('App: ', app);
-	let state     = app.init;
+	let game      = new KGame(main);
+	let state     = game.init;
 	let kState    = new KGameState(state);
 	let lastState = null;
 
@@ -267,25 +284,15 @@ if (typeof window !== 'undefined') {
 		draw(canvas, kState);
 		lastState = kState;
 	    }
-
-	    // window.requestAnimationFrame(tick);
 	};
 
 	tick();
-
-	// window.requestAnimationFrame(tick);
-
-	// implement a keyboard event handler
-	// when the user presses a key, it will call the global app.when
-	// function and update the global state mutably
+	
 	document.addEventListener(
 	    'keydown',
 	    function(event) {
-		// Convert the key code to a number
 		const keyCode = event.keyCode || event.which;
-		
-		// Call the 'when' function of the app with the current state and key code
-		state = app.when(keyCode)(state);
+		state = game.when(keyCode)(state);
 		tick();
 	    },
 	);

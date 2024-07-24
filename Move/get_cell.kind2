@@ -1,6 +1,6 @@
 use Move/new
 
-getCell
+get_cell
 - move: Move
 : (Cell _)
 

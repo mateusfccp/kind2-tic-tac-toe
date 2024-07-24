@@ -1,0 +1,11 @@
+use Bool/{true, false}
+use Maybe/{some, none}
+
+has_value <A>
+- maybe: (Maybe A)
+: Bool
+
+match maybe {
+  some: true
+  none: false
+}

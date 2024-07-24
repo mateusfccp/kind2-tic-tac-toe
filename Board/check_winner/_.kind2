@@ -1,0 +1,38 @@
+use Board/check_winner/check_line
+use Bool/{true, false}
+use Maybe/{some, none}
+
+right:        _ = (Pair/new _ _ 1 0)
+down:         _ = (Pair/new _ _ 0 1)
+bottom_right: _ = (Pair/new _ _ 1 1)
+bottom_left:  _ = (Pair/new _ _ (U48/neg 1) 1)
+
+check_winner
+- board: (Board _)
+: (Maybe Player)
+
+(List/fold _ _
+  λmove λcurrent
+    match current {
+      some: current
+      none:
+        // Here we should fork for all four directions, but AFAIK we can't fork
+        // in Kind, only in Bend
+        use folder = λdirection λcurrent
+	  match current {
+            true: true
+            false: (check_line move 2 board direction)
+          }
+
+	let directions = [right, down, bottom_right, bottom_left]
+        let winner = (List/fold _ _ folder false directions)
+        match winner {
+          true: match move {
+	    Move/new: (some _ move.player)
+          }
+          false: (none _)
+        }
+    }
+
+  (none _)
+  board)

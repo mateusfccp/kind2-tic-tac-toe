@@ -1,0 +1,8 @@
+in_progress
+- currentPlayer: Player
+- cursorPosition: (Cell _)
+- board: (Board _)
+- debug_mode: Bool
+: GameState
+
+~λP λin_progress λdraw λwinner (in_progress currentPlayer cursorPosition board debug_mode)

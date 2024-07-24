@@ -1,0 +1,15 @@
+/// Defines the Game type, representing a Game with state management and rendering.
+///
+/// # Constructor
+///
+/// * `new` - Creates a new App instance with the following components:
+///
+/// # Fields
+///
+/// * `init` - The initial state of the game
+/// * `when` - A function that updates the state based on keyboard input.
+
+data Game
+| new
+  (init: GameState)
+  (when: U48 -> GameState -> GameState)

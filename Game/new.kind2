@@ -1,0 +1,17 @@
+/// Creates a new Game instance.
+///
+/// # Inputs
+///
+/// * `tick` - A function that updates the state on each tick.
+/// * `when` - A function that updates the state based on keyboard input.
+///
+/// # Output
+///
+/// A new App instance with the specified behaviors.
+
+new
+- init: GameState
+- when: U48 -> GameState -> GameState
+: Game
+
+~λP λnew (new init when)

@@ -1,30 +1,34 @@
-main: _
+use Bool/{and, if}
+use GameState/{restart, in_progress, draw, winner, put_move, move_cursor, switch_debug_mode}
+
+main: Game
 
 use init = (GameState/new _)
 
 use when = λkey λstate
-  match state {
-    GameState/inProgress:
-      // Keycode 13 = Enter
-      (U48/if _ (== key 13)
-        (GameState/putMove state)
+  let pressing = λ(keycode: Key) (U48/to_bool (== key keycode))
+  (if _ (pressing Key/r)
+    (restart state)
+  (if _ (pressing Key/d)
+    (switch_debug_mode state)
 
-      // Keycode 88 = X
-      (U48/if _ (== key 88)
-        (GameState/inProgress Player/x state.cursorPosition state.board)
-
-      // Keycode 79 = O
-      (U48/if _ (== key 79)
-        (GameState/inProgress Player/o state.cursorPosition state.board)
-
-      // Else
-        let direction = (Direction/fromKeycode key)
+    match state {
+      in_progress:
+        (if _ (pressing Key/enter)
+          (put_move state)
+        (if _ (and (pressing Key/x) state.debug_mode)
+          (in_progress Player/x state.cursor_position state.board state.debug_mode)
+        (if _ (and (pressing Key/o) state.debug_mode)
+           (in_progress Player/o state.cursor_position state.board state.debug_mode)
+  
+        // Else
+        let direction = (Direction/from_keycode key)
         match direction {
-          Maybe/some: (GameState/moveCursor state direction.value)
-	  Maybe/none: state
+          Maybe/some: (move_cursor state direction.value)
+          Maybe/none: state
         })))
-    GameState/draw: state
-    GameState/winner: state
-  }
+      draw: state
+      winner: state
+    }))
 
-(App/new _ _ init when [])
+(Game/new init when)

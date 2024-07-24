@@ -1,0 +1,36 @@
+use Bool/{true, false}
+use GameState/{in_progress, draw, winner, cell_available}
+use List/{concat, length}
+use Maybe/{some, none}
+use U48/{if, from_nat}
+
+put_move
+- state: GameState
+: GameState
+
+match state {
+  in_progress:
+    let cell_available = (cell_available state)
+    match cell_available {
+      false: state
+      true:
+        let player = (Player/switch state.current_player)
+        let move = (Move/new state.current_player state.cursor_position)
+	let board = (concat _ state.board [move])
+	let board = (Board/sort board)
+	let winner_player = (Board/check_winner board)
+
+	match winner_player {
+	  none:
+	    let length = (length _ board)
+	    let length = (from_nat length)
+
+	    (if _ (== length 9)
+	      (draw board state.debug_mode)
+	      (in_progress player state.cursor_position board state.debug_mode))
+	  some: (winner winner_player.value board state.debug_mode)
+	}
+    }
+  draw: state
+  winner: state
+}

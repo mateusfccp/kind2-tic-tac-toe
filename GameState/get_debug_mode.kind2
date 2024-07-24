@@ -1,0 +1,9 @@
+get_debug_mode
+- state: GameState
+: Bool
+
+match state {
+  GameState/in_progress: state.debug_mode
+  GameState/winner: state.debug_mode
+  GameState/draw: state.debug_mode
+}

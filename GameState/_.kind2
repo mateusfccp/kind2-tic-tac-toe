@@ -1,4 +1,4 @@
 data GameState
-| inProgress (currentPlayer: Player) (cursorPosition: (Cell _)) (board: (Board _))
-| draw (board: (Board _))
-| winner (player: Player) (board: (Board _))
+| in_progress (current_player: Player) (cursor_position: (Cell _)) (board: (Board _)) (debug_mode: Bool)
+| draw (board: (Board _)) (debug_mode: Bool)
+| winner (player: Player) (board: (Board _)) (debug_mode: Bool)

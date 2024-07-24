@@ -1,0 +1,14 @@
+use Direction/{left, up, right, down}
+use Maybe/{none, some}
+use U48/if
+
+from_keycode
+- keycode: U48
+: (Maybe Direction)
+
+(if _ (== keycode Key/leftArrow)  (some _ left)
+(if _ (== keycode Key/upArrow)    (some _ up)
+(if _ (== keycode Key/rightArrow) (some _ right)
+(if _ (== keycode Key/downArrow)  (some _ down)
+(none _)))))
+

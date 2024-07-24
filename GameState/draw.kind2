@@ -1,5 +1,6 @@
 draw
 - board: (Board _)
+- debug_mode: Bool
 : GameState
 
-~λP λinProgress λdraw λwinner (draw board)
+~λP λin_progress λdraw λwinner (draw board debug_mode)

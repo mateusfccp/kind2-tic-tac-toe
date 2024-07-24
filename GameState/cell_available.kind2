@@ -1,0 +1,17 @@
+use Bool/{false, true, not}
+use GameState/{in_progress, draw, winner}
+use List/{find, map}
+use Maybe/{some, none, has_value}
+
+cell_available
+- state: GameState
+: Bool
+
+match state {
+  in_progress:
+    let occupied_cells = (map Move (Cell _) state.board Move/get_cell)
+    let cell_occupied = (find _ λcell (Cell/eq cell state.cursor_position) occupied_cells)
+    (not (has_value _ cell_occupied))
+  draw: false
+  winner: false
+}

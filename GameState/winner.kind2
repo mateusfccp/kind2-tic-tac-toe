@@ -1,6 +1,7 @@
 winner
 - player: Player
 - board: (Board _)
+- debug_mode: Bool
 : GameState
 
-~λP λinProgress λdraw λwinner (winner player board)
+~λP λin_progress λdraw λwinner (winner player board debug_mode)

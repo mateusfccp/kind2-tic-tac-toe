@@ -1,4 +1,6 @@
+use Cell/{lt, gte}
 use List/qsort
+use Move/get_cell
 
 sort
 - board: (Board _)
@@ -6,5 +8,5 @@ sort
 
 (qsort _
   board
-  λa λb (Cell/lt (Move/getCell a) (Move/getCell b))
-  λa λb (Cell/gte (Move/getCell a) (Move/getCell b)))
+  λa λb (lt (get_cell a) (get_cell b))
+  λa λb (gte (get_cell a) (get_cell b)))

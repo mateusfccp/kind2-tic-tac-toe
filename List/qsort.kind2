@@ -1,4 +1,8 @@
-use List/{cons, filter, nil}
+// A inneficient quicksort implementation.
+//
+// As we are only using it with small ammount of data, it's acceptable.
+
+use List/{concat, cons, filter, nil}
 
 qsort <A>
 - list: (List A)
@@ -11,7 +15,7 @@ match list {
   cons:
     let lesser  = (filter _ (gte list.head) list.tail)
     let greater = (filter _ (lt  list.head) list.tail)
-    (List/concat _
+    (concat _
       (qsort _ lesser lt gte)
       list.head ++ (qsort _ greater lt gte))
 }
