@@ -1,5 +1,0 @@
-skip <A>
-- parser: (Parser A)
-: (Parser A)
-
-λcode (parser code)

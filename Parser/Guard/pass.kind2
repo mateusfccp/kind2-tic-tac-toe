@@ -1,2 +1,0 @@
-pass <A> (then: (Parser A)) : (Parser/Guard A) =
-  (Parser/Guard/new _ (Parser/pure _ Bool/true) then)

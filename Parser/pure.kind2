@@ -1,5 +1,0 @@
-pure <A>
-- value: A
-: (Parser A)
-
-λcode (Parser/Result/done _ code value)

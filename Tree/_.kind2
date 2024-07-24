@@ -1,3 +1,0 @@
-data Tree <A>
-| node (val: A) (lft: (Tree A)) (rgt: (Tree A))
-| leaf

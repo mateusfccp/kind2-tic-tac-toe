@@ -1,4 +1,0 @@
-use Parser/pick_while/{go}
-
-pick_while (cond: Char -> Bool) : (Parser String) =
-  λcode (go cond code)

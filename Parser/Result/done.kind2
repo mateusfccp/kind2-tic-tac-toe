@@ -1,2 +1,0 @@
-Parser/Result/done <T> (code: String) (value: T) : (Parser/Result T) =
-  (Parser/Result/done _ code value)

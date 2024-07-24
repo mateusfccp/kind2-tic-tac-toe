@@ -1,2 +1,0 @@
-Parser/Guard <A: *> : * =
-  (Pair (Parser Bool) (Parser A))

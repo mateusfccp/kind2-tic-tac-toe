@@ -1,5 +1,0 @@
-fail <A>
-- error: String
-: (Parser A)
-
-λcode (Parser/Result/fail _ error)
